@@ -112,12 +112,12 @@ static Key keys[] = {
     {MODKEY | ShiftMask, XK_period, tagmon, {.i = +1}},
 
     // map media and brightness keys
-    {0, XF86XK_MonBrightnessUp, spawn, SHCMD("xbacklight -inc 15")},
-    {0, XF86XK_MonBrightnessDown, spawn, SHCMD("xbacklight -dec 15")},
+    {0, XF86XK_MonBrightnessUp, spawn, SHCMD("~/Scripts/backlight up")},
+    {0, XF86XK_MonBrightnessDown, spawn, SHCMD("~/Scripts/backlight down")},
     {0, XF86XK_AudioMute, spawn,
      SHCMD("pactl set-source-mut @DEFAULT-SOURCE@ toggle")},
-    {0, XF86XK_AudioRaiseVolume, spawn, SHCMD("pactl set-sink-volume 0 +5%")},
-    {0, XF86XK_AudioLowerVolume, spawn, SHCMD("pactl set-sink-volume 0 -5%")},
+    {0, XF86XK_AudioRaiseVolume, spawn, SHCMD("~/Scripts/volume up")},
+    {0, XF86XK_AudioLowerVolume, spawn, SHCMD("~/Scripts/volume down")},
     {0, XF86XK_AudioPlay, spawn, SHCMD("playerctl play-pause")},
 
     // map tag keys

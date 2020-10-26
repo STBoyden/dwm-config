@@ -7,7 +7,6 @@ static const int showbar = 1;           /* 0 means no bar */
 static const int topbar = 1;            /* 0 means bottom bar */
 static const char *fonts[] = {"iosevka term:size=11"};
 static const char dmenufont[] = "iosevka term:size=11";
-/* static const char dmenufont[]       = "monospace:size=10"; */
 static const char col_gray1[] = "#222222";
 static const char col_gray2[] = "#444444";
 static const char col_gray3[] = "#bbbbbb";
@@ -36,8 +35,8 @@ static const Rule rules[] = {
     /* class, instance, title, tags mask, isfloating, monitor */
     {"firefox", NULL, NULL, 1 << 8, 0, -1},
     {"screengrab", NULL, NULL, 0, 1, -1},
-    {"libreoffice", NULL, NULL, 1 << 3, 0, -1},
-    {"spotify", NULL, NULL, 1 << 7, 0, -1},
+    {"libreoffice", NULL, NULL, 1 << 2, 0, -1},
+    {"spotify", NULL, NULL, 1 << 6, 0, -1},
 };
 
 /* layout(s) */
@@ -113,12 +112,12 @@ static Key keys[] = {
     {MODKEY | ShiftMask, XK_period, tagmon, {.i = +1}},
 
     // map media and brightness keys
-    {0, XF86XK_MonBrightnessUp, spawn, SHCMD("xbacklight -inc 15")},
-    {0, XF86XK_MonBrightnessDown, spawn, SHCMD("xbacklight -dec 15")},
+    {0, XF86XK_MonBrightnessUp, spawn, SHCMD("~/Scripts/backlight up")},
+    {0, XF86XK_MonBrightnessDown, spawn, SHCMD("~/Scripts/backlight down")},
     {0, XF86XK_AudioMute, spawn,
      SHCMD("pactl set-source-mut @DEFAULT-SOURCE@ toggle")},
-    {0, XF86XK_AudioRaiseVolume, spawn, SHCMD("pactl set-sink-volume 0 +5%")},
-    {0, XF86XK_AudioLowerVolume, spawn, SHCMD("pactl set-sink-volume 0 -5%")},
+    {0, XF86XK_AudioRaiseVolume, spawn, SHCMD("~/Scripts/volume up")},
+    {0, XF86XK_AudioLowerVolume, spawn, SHCMD("~/Scripts/volume down")},
     {0, XF86XK_AudioPlay, spawn, SHCMD("playerctl play-pause")},
 
     // map tag keys
