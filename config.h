@@ -1,10 +1,13 @@
 /* See LICENSE file for copyright and license details. */
 
+static const unsigned int GAPS_DEFAULT = 12;
+
 /* appearance */
 static const unsigned int borderpx = 1; /* border pixel of windows */
-static const unsigned int snap = 32;    /* snap pixel */
-static const int showbar = 1;           /* 0 means no bar */
-static const int topbar = 1;            /* 0 means bottom bar */
+static const unsigned int gappx = GAPS_DEFAULT;
+static const unsigned int snap = 32; /* snap pixel */
+static const int showbar = 1;        /* 0 means no bar */
+static const int topbar = 1;         /* 0 means bottom bar */
 static const char *fonts[] = {"iosevka term:size=11"};
 static const char dmenufont[] = "iosevka term:size=11";
 static const char col_gray1[] = "#222222";
@@ -25,7 +28,7 @@ static const char *colors[][3] = {
 };
 
 /* tagging */
-static const char *tags[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+static const char *tags[] = {"SYS", "DEV", "WEB", "MSG", "DOC", "MUS"};
 
 static const Rule rules[] = {
     /* xprop(1):
@@ -33,10 +36,17 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
     /* class, instance, title, tags mask, isfloating, monitor */
-    {"firefox", NULL, NULL, 1 << 8, 0, -1},
+    {"firefox", NULL, NULL, 1 << 2, 0, -1},
     {"screengrab", NULL, NULL, 0, 1, -1},
-    {"libreoffice", NULL, NULL, 1 << 2, 0, -1},
-    {"spotify", NULL, NULL, 1 << 6, 0, -1},
+    {"libreoffice", "libreoffice-writer", NULL, 1 << 4, 0, -1},
+    {"libreoffice", "libreoffice-base", NULL, 1 << 4, 0, -1},
+    {"libreoffice", "libreoffice-draw", NULL, 1 << 4, 0, -1},
+    {"libreoffice", "libreoffice-math", NULL, 1 << 4, 0, -1},
+    {"libreoffice", "libreoffice-impress", NULL, 1 << 4, 0, -1},
+    {"libreoffice", "libreoffice-startcenter", NULL, 1 << 4, 0, -1},
+    {"Spotify", NULL, NULL, 1 << 5, 0, -1},
+    {"spotify", NULL, NULL, 1 << 5, 0, -1},
+    {"discord", NULL, NULL, 1 << 3, 0, -1},
 };
 
 /* layout(s) */
@@ -45,14 +55,15 @@ static const int nmaster = 1;    /* number of clients in master area */
 static const int resizehints =
     1; /* 1 means respect size hints in tiled resizals */
 
-#include "fibonacci.c"
+/* #include "fibonacci.c" */
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    {"[@]", spiral},
+    /* {"[@]", spiral}, */
     {"[]=", tile},
     {"><>", NULL},
     {"[M]", monocle},
-    {"[\\]", dwindle}};
+    /* {"[\\]", dwindle}}; */
+};
 
 /* key definitions */
 #define MODKEY Mod4Mask
@@ -96,12 +107,17 @@ static Key keys[] = {
     {MODKEY, XK_Tab, view, {0}},
     {MODKEY | ShiftMask, XK_c, killclient, {0}},
 
+    // gaps
+    {MODKEY, XK_minus, setgaps, {.i = -1}},
+    {MODKEY | ShiftMask, XK_minus, setgaps, {.i = 0}},
+    {MODKEY, XK_equal, setgaps, {.i = +1}},
+
     // set layouts
-    {MODKEY, XK_s, setlayout, {.v = &layouts[0]}},
-    {MODKEY, XK_t, setlayout, {.v = &layouts[1]}},
-    {MODKEY, XK_f, setlayout, {.v = &layouts[2]}},
-    {MODKEY, XK_m, setlayout, {.v = &layouts[3]}},
-    {MODKEY, XK_d, setlayout, {.v = &layouts[4]}},
+    /* {MODKEY, XK_s, setlayout, {.v = &layouts[0]}}, */
+    /* {MODKEY, XK_t, setlayout, {.v = &layouts[1]}}, */
+    /* {MODKEY, XK_f, setlayout, {.v = &layouts[2]}}, */
+    /* {MODKEY, XK_m, setlayout, {.v = &layouts[3]}}, */
+    /* {MODKEY, XK_d, setlayout, {.v = &layouts[4]}}, */
     {MODKEY, XK_space, setlayout, {0}},
     {MODKEY | ShiftMask, XK_space, togglefloating, {0}},
     {MODKEY, XK_0, view, {.ui = ~0}},
